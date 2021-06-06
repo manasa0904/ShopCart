@@ -1,0 +1,16 @@
+const express=require("express")
+const router=express.Router()
+const {usersAuth,usersProfile,registerUser,updateUserProfile,getUser,deleteUser,getUserById,updateUser} =require("../controllers/userController")
+const {protect,admin}=require("../middleWare/applyMiddleware")
+router.post("/login",usersAuth)
+router.route("/profile")
+.get(protect,usersProfile)
+.put(protect,updateUserProfile)
+router.route("/").post(registerUser)
+router.get("/",protect,admin,getUser)
+router.route("/:id")
+.delete(protect,admin,deleteUser)
+.get(protect,admin,getUserById)
+.put(protect,admin,updateUser)
+
+module.exports=router

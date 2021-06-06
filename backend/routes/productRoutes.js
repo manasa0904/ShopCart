@@ -1,0 +1,15 @@
+const express=require("express")
+const router = express.Router()
+const {getProductsById,deleteProductsById,updateProduct,createdProduct,createReviews}=require("../controllers/productController")
+const asyncHandler=require("express-async-handler")
+const Product = require("../models/productModel")
+const {protect,admin}=require("../middleWare/applyMiddleware")
+router.route("/").post(protect,admin,createdProduct)
+router.route("/:id")
+.get(getProductsById)
+.delete(protect,admin,deleteProductsById)
+.put(protect,admin,updateProduct)
+router.route("/:id/reviews")
+.post(protect,createReviews)
+module.exports=router
+
