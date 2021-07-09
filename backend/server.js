@@ -20,7 +20,7 @@ app.get("/",async (req,res)=>{
   const keyword =req.query.keyword ? {
     name:{
       $regex:req.query.keyword,
-      $options:"i"
+      $options:"i"//case insensitive search
     }}: {}
   
     const products =await Product.find({...keyword})

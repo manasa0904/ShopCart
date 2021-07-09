@@ -1,13 +1,13 @@
 const asyncHandler=require("express-async-handler")
 const Product = require("../models/productModel")
-const Order = require("../models/productModel")
+
 
 //path product/id
 //get
 const getProductsById = asyncHandler(async (req,res)=>{
         const id= req.params.id
         const products =await Product.findOne({_id:id})
-      // console.log(products)
+     
         res.send(products)
     
   })
@@ -83,7 +83,7 @@ const createReviews = asyncHandler(async (req,res)=>{
   console.log(product.user)
    const alreadyReviewed=product.reviews.find(r => r.user.toString()===req.user._id.toString())
    if(alreadyReviewed){
-     res.send(400)
+     res.sendStatus(400)
      throw new Error("Product already reviewed")
    }
 

@@ -18,6 +18,7 @@ const importData =async ()=>{
         await productSchema.deleteMany()
         await userSchema.deleteMany()
         const insert_user=await userSchema.insertMany(users)
+      
         const adminid=insert_user[0]._id
         const sampleprod=products.map(pro =>{
         
